@@ -1,5 +1,5 @@
 import * as React from "react"
-
+import { graphql } from 'gatsby';
 // styles
 const pageStyles = {
   color: "#232129",
@@ -126,7 +126,12 @@ const links = [
 ]
 
 // markup
-const IndexPage = () => {
+const IndexPage = ({ data }) => {
+console.log(data.allPrismicMainPage);
+//  const dataString = data.allPrismicMainPage.edges[0].node.dataString;
+//  const dataObject = JSON.parse(dataString);
+//  console.log(dataObject);
+
   return (
     <main style={pageStyles}>
       <title>Home Page</title>
@@ -180,5 +185,19 @@ const IndexPage = () => {
     </main>
   )
 }
+
+export const query = graphql`
+  query MyQuery {
+    allPrismicMainPage {
+      edges {
+        node {
+          id
+	  prismicId
+	  dataString
+	}
+      }
+    }
+  }
+`;
 
 export default IndexPage
