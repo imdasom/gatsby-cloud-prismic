@@ -89,7 +89,7 @@ const JobListPage = ({ data }) => {
 };
 
 export const query = graphql`
-  query JobPageQuery($uid: String!) {
+  query JobPageQuery($uid: String) {
     allPrismicJobDetail(filter: { uid: { eq: $uid } }) {
       nodes {
         uid
