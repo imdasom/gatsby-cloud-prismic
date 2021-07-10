@@ -1,16 +1,27 @@
 module.exports = {
-    siteMetadata: {
-        siteUrl: `https://www.yourdomain.tld`,
+  siteMetadata: {
+    siteUrl: 'https://team.wired.company',
+    title: 'team-wired',
+  },
+  plugins: [
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        name: 'images',
+        path: './src/images/',
+      },
+      __key: 'images',
     },
-    plugins: [
-        {
-            resolve: 'gatsby-source-prismic',
-	    options: {
-		repositoryName: 'my-gatsby-site',
-		schemas: {
-		    'main-page': require('./custom-type/main-page-type.json')
-		}
-	    }
-	}
-    ]
-}
+    {
+      resolve: 'gatsby-source-prismic',
+      options: {
+        repositoryName: 'team-wired',
+        schemas: {
+          Home: require('./src/custom-types/home.json'),
+          Culture: require('./src/custom-types/culture.json'),
+          JobDetail: require('./src/custom-types/job-detail.json'),
+        },
+      },
+    },
+  ],
+};
