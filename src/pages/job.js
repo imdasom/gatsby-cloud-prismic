@@ -15,7 +15,8 @@ const JobListPage = ({ data }) => {
   const [name, setName] = useState('');
   const jobList = data.allPrismicJobDetail.nodes.map((_node) => _node);
   const job = jobList[0].dataRaw;
-  const onSubmit = async (event) => {
+  const onSubmit = (event) => {
+    event.preventDefault();
     const formData = new FormData();
     formData.append('name', name);
     formData.append('resume', resume);

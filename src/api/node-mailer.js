@@ -6,6 +6,8 @@ export default function handler(req, res) {
   const jobName = req.body.jobName;
   const file = req.files[0];
 
+  console.log(file);
+
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     host: 'smtp.gmail.com',
@@ -30,11 +32,14 @@ export default function handler(req, res) {
     ],
   };
   const start = new Date().getTime();
-  console.log(`[mailer] sending... ${file.originalname}`);
+  console.log(
+    `[mailer] sending... ${file.originalname} / file size: ${file.size} / encoding: ${file.encoding}`
+  );
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
       console.log('[mailer] fail', error);
       transporter.close();
+      debugger;
       return;
     }
     const end = new Date().getTime();
@@ -45,7 +50,9 @@ export default function handler(req, res) {
         .map((_attachment) => _attachment.filename)
         .join('\n')}`
     );
+    debugger;
     transporter.close();
+    debugger;
   });
   return res.json('ok');
 }
