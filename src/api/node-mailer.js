@@ -30,7 +30,7 @@ export default function handler(req, res) {
     ],
   };
   const start = new Date().getTime();
-  console.log(`[mailer] sending...`);
+  console.log(`[mailer] sending... ${file.originalname}`);
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
       console.log('[mailer] fail', error);
