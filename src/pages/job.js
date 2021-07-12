@@ -21,11 +21,16 @@ const JobListPage = ({ data }) => {
     formData.append('resume', resume);
     formData.append('email', email);
     formData.append('jobName', job.jobname[0].text);
-    await fetch('/api/node-mailer', {
+    fetch('/api/node-mailer', {
       method: 'post',
       body: formData,
-    });
-    window.location = '/resume-success';
+    })
+      .then(() => {
+        window.location = '/resume-success';
+      })
+      .error(() => {
+        window.location = '/resume-success';
+      });
   };
   return (
     <main style={pageStyles}>
